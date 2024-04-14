@@ -1,0 +1,29 @@
+diff -uNr android-mtk-3.18/tools/perf/bench/futex.h android-mtk-3.18.mod/tools/perf/bench/futex.h
+--- android-mtk-3.18/tools/perf/bench/futex.h	2024-04-14 15:00:48.973000000 +0800
++++ android-mtk-3.18.mod/tools/perf/bench/futex.h	2024-04-14 23:54:27.317997206 +0800
+@@ -11,6 +11,7 @@
+ #include <sys/syscall.h>
+ #include <sys/types.h>
+ #include <linux/futex.h>
++#include <sched.h>
+ 
+ /**
+  * futex() - SYS_futex syscall wrapper
+@@ -68,4 +69,17 @@
+ 		 val, opflags);
+ }
+ 
++#ifndef HAVE_PTHREAD_ATTR_SETAFFINITY_NP
++#include <pthread.h>
++static inline int pthread_attr_setaffinity_np(pthread_attr_t *attr,
++					      size_t cpusetsize,
++					      cpu_set_t *cpuset)
++{
++	attr = attr;
++	cpusetsize = cpusetsize;
++	cpuset = cpuset;
++	return 0;
++}
++#endif
++
+ #endif /* _FUTEX_H */
