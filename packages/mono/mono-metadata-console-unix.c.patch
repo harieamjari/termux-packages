@@ -1,0 +1,12 @@
+diff -uNr mono/mono/metadata/console-unix.c mono.mod/mono/metadata/console-unix.c
+--- mono/mono/metadata/console-unix.c	2023-06-14 23:11:24.000000000 +0800
++++ mono.mod/mono/metadata/console-unix.c	2024-05-27 07:07:06.971121974 +0800
+@@ -98,7 +98,7 @@
+ MonoBoolean
+ ves_icall_System_ConsoleDriver_Isatty (HANDLE handle, MonoError* error)
+ {
+-	return isatty (GPOINTER_TO_INT (handle));
++	return 0/*isatty (GPOINTER_TO_INT (handle))*/;
+ }
+ 
+ static MonoBoolean

@@ -4,12 +4,14 @@ TERMUX_PKG_LICENSE="custom"
 TERMUX_PKG_LICENSE_FILE="LICENSE"
 TERMUX_PKG_MAINTAINER="@termux"
 TERMUX_PKG_VERSION=6.12.0.199
-TERMUX_PKG_REVISION=1
+TERMUX_PKG_REVISION=2
 TERMUX_PKG_SRCURL=https://download.mono-project.com/sources/mono/mono-${TERMUX_PKG_VERSION}.tar.xz
 TERMUX_PKG_SHA256=c0850d545353a6ba2238d45f0914490c6a14a0017f151d3905b558f033478ef5
 TERMUX_PKG_DEPENDS="krb5, mono-libs, zlib"
 TERMUX_PKG_HOSTBUILD=true
 TERMUX_PKG_AUTO_UPDATE=true
+TERMUX_PKG_NO_STRIP=true
+
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 --disable-btls
 --without-ikvm-native
@@ -56,6 +58,8 @@ termux_step_pre_configure() {
 	if [ "$TERMUX_ARCH" == "arm" ]; then
 		CFLAGS="${CFLAGS//-mthumb/}"
 	fi
+	CFLAGS+=" -ggdb3"
+	CXXFLAGS+=" -ggdb3"
 	LDFLAGS+=" -lgssapi_krb5"
 }
 
