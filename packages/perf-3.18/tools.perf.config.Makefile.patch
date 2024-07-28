@@ -1,0 +1,29 @@
+diff -uNr android-mtk-3.18/tools/perf/config/Makefile android-mtk-3.18.mod/tools/perf/config/Makefile
+--- android-mtk-3.18/tools/perf/config/Makefile	2024-04-14 15:00:49.027000000 +0800
++++ android-mtk-3.18.mod/tools/perf/config/Makefile	2024-04-14 22:11:08.435991486 +0800
+@@ -99,7 +99,7 @@
+ 
+ # Treat warnings as errors unless directed not to
+ ifneq ($(WERROR),0)
+-  CFLAGS += -Werror
++#  CFLAGS += -Werror
+ endif
+ 
+ ifndef DEBUG
+@@ -159,7 +159,7 @@
+ 
+ feature_check = $(eval $(feature_check_code))
+ define feature_check_code
+-  feature-$(1) := $(shell $(MAKE) OUTPUT=$(OUTPUT_FEATURES) CFLAGS="$(EXTRA_CFLAGS) $(FEATURE_CHECK_CFLAGS-$(1))" LDFLAGS="$(LDFLAGS) $(FEATURE_CHECK_LDFLAGS-$(1))" -C config/feature-checks test-$1.bin >/dev/null 2>/dev/null && echo 1 || echo 0)
++  feature-$(1) := $(shell $(MAKE) CC=$(CC) OUTPUT=$(OUTPUT_FEATURES) CFLAGS="$(EXTRA_CFLAGS) $(FEATURE_CHECK_CFLAGS-$(1))" LDFLAGS="$(LDFLAGS) $(FEATURE_CHECK_LDFLAGS-$(1))" -C config/feature-checks test-$1.bin >/dev/null 2>/dev/null && echo 1 || echo 0)
+ endef
+ 
+ feature_set = $(eval $(feature_set_code))
+@@ -290,6 +290,7 @@
+ CFLAGS += -I$(src-perf)/util
+ CFLAGS += -I$(src-perf)
+ CFLAGS += -I$(LIB_INCLUDE)
++CFLAGS += -I$(prefix)/include
+ 
+ CFLAGS += -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE
+ 

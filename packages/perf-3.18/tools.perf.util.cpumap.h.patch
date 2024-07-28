@@ -1,0 +1,16 @@
+diff -uNr android-mtk-3.18/tools/perf/util/cpumap.h android-mtk-3.18.mod/tools/perf/util/cpumap.h
+--- android-mtk-3.18/tools/perf/util/cpumap.h	2024-04-14 15:00:49.079000000 +0800
++++ android-mtk-3.18.mod/tools/perf/util/cpumap.h	2024-04-14 23:09:57.005999115 +0800
+@@ -49,9 +49,9 @@
+ 	return map ? map->map[0] == -1 : true;
+ }
+ 
+-int max_cpu_num;
+-int max_node_num;
+-int *cpunode_map;
++extern int max_cpu_num;
++extern int max_node_num;
++extern int *cpunode_map;
+ 
+ int cpu__setup_cpunode_map(void);
+ 

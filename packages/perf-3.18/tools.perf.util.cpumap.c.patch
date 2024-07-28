@@ -1,0 +1,14 @@
+diff -uNr android-mtk-3.18/tools/perf/util/cpumap.c android-mtk-3.18.mod/tools/perf/util/cpumap.c
+--- android-mtk-3.18/tools/perf/util/cpumap.c	2024-04-14 15:00:49.078000000 +0800
++++ android-mtk-3.18.mod/tools/perf/util/cpumap.c	2024-04-14 23:10:06.725999109 +0800
+@@ -6,6 +6,10 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ 
++int max_cpu_num;
++int max_node_num;
++int *cpunode_map;
++
+ static struct cpu_map *cpu_map__default_new(void)
+ {
+ 	struct cpu_map *cpus;
