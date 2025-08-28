@@ -1,0 +1,11 @@
+diff -uNr android-mtk-3.18/tools/perf/config/feature-checks/Makefile android-mtk-3.18.mod/tools/perf/config/feature-checks/Makefile
+--- android-mtk-3.18/tools/perf/config/feature-checks/Makefile	2024-04-14 15:00:49.027000000 +0800
++++ android-mtk-3.18.mod/tools/perf/config/feature-checks/Makefile	2024-04-14 21:18:38.619993739 +0800
+@@ -31,6 +31,7 @@
+ 
+ CC := $(CROSS_COMPILE)gcc -MD
+ PKG_CONFIG := $(CROSS_COMPILE)pkg-config
++override CFLAGS += -I$(prefix)/include
+ 
+ all: $(FILES)
+ 
