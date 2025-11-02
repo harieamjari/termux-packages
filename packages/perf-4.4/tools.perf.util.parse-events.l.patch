@@ -1,0 +1,20 @@
+diff -uNr android-trusty-4.4.mod//tools/perf/util/parse-events.l android-trusty-4.4/tools/perf/util/parse-events.l
+--- android-trusty-4.4/tools/perf/util/parse-events.l	2025-11-02 14:04:52.817409123 +0800
++++ android-trusty-4.4.mod//tools/perf/util/parse-events.l	2025-11-02 09:15:52.781403490 +0800
+@@ -5,6 +5,7 @@
+ %option stack
+ %option bison-locations
+ %option yylineno
++%option extra-type="int"
+ 
+ %{
+ #include <errno.h>
+@@ -141,7 +142,7 @@
+ 			BEGIN(event);
+ 
+ 		if (start_token) {
+-			parse_events_set_extra(NULL, yyscanner);
++			parse_events_set_extra(0, yyscanner);
+ 			/*
+ 			 * The flex parser does not init locations variable
+ 			 * via the scan_string interface, so we need do the

@@ -1,0 +1,28 @@
+diff -uNr android-trusty-4.4.mod//tools/perf/util/parse-events.y android-trusty-4.4/tools/perf/util/parse-events.y
+--- android-trusty-4.4/tools/perf/util/parse-events.y	2025-11-02 14:04:54.753409122 +0800
++++ android-trusty-4.4.mod//tools/perf/util/parse-events.y	2025-11-02 09:42:22.053402354 +0800
+@@ -28,7 +28,7 @@
+ 	INIT_LIST_HEAD(list);         \
+ } while (0)
+ 
+-static inc_group_count(struct list_head *list,
++static void inc_group_count(struct list_head *list,
+ 		       struct parse_events_evlist *data)
+ {
+ 	/* Count groups only have more than 1 members */
+@@ -36,6 +36,15 @@
+ 		data->nr_groups++;
+ }
+ 
++/* should fix conflicting types for parse_events_error
++ * due to implicit declaration.
++ */
++void parse_events_error(YYLTYPE *loc, void *data,
++			void *scanner __maybe_unused,
++			char const *msg __maybe_unused);
++
++extern int parse_events_lex(YYSTYPE *, YYLTYPE *, void *scanner);
++
+ %}
+ 
+ %token PE_START_EVENTS PE_START_TERMS
